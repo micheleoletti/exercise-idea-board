@@ -45,8 +45,8 @@ export function IdeaProvider({ children }: { children: ReactNode }) {
         uuid: uuidv4(),
         title: "",
         description: "",
-        createdAt: new Date().toString(),
-        updatedAt: new Date().toString(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       });
 
       return newIdeas;
@@ -58,7 +58,10 @@ export function IdeaProvider({ children }: { children: ReactNode }) {
 
       let ideaIndex = updatedIdeas.findIndex((item) => item.uuid == idea.uuid);
 
-      updatedIdeas[ideaIndex] = { ...idea, updatedAt: new Date().toString() };
+      updatedIdeas[ideaIndex] = {
+        ...idea,
+        updatedAt: new Date().toISOString(),
+      };
 
       return updatedIdeas;
     });

@@ -5,11 +5,11 @@ import { IdeaProvider } from "../contexts/IdeaContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    // <ChakraProvider>
-    <IdeaProvider>
-      <Component {...pageProps} />
-    </IdeaProvider>
-    // </ChakraProvider>
+    <ChakraProvider>
+      <IdeaProvider>
+        <Component {...pageProps} />
+      </IdeaProvider>
+    </ChakraProvider>
   );
 }
 

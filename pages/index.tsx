@@ -1,7 +1,12 @@
+import { Stack } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useContext } from "react";
+import Header from "../components/Header";
+import IdeaCard from "../components/IdeaCard";
+import IdeaSorter from "../components/IdeaSorter";
 import {
   IdeaContext,
   IdeaContextSchema,
@@ -11,80 +16,20 @@ import { Idea } from "../models/idea";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
-  const { ideas, createIdea, updateIdea, removeIdea, sortIdeas } =
+  const { ideas, createIdea, updateIdea } =
     useContext<IdeaContextSchema>(IdeaContext);
-
-  function updateIdeaField(idea: Idea, field: string, value: any) {
-    updateIdea!({ ...idea, [field]: value });
-  }
 
   return (
     <>
-      <button
-        onClick={() => {
-          sortIdeas!({ field: SortFieldOption.Title, desc: false });
-        }}
-      >
-        Sort ideas TITLE ASC
-      </button>
-      <button
-        onClick={() => {
-          sortIdeas!({ field: SortFieldOption.Title, desc: true });
-        }}
-      >
-        Sort ideas TITLE DESC
-      </button>
-      <button
-        onClick={() => {
-          sortIdeas!({ field: SortFieldOption.Date, desc: false });
-        }}
-      >
-        Sort ideas DATE ASC
-      </button>
-      <button
-        onClick={() => {
-          sortIdeas!({ field: SortFieldOption.Date, desc: true });
-        }}
-      >
-        Sort ideas TITLE DESC
-      </button>
-      {ideas.map((idea) => {
-        return (
-          <div key={idea.uuid}>
-            <div>
-              <input
-                autoFocus
-                type="text"
-                value={idea.title}
-                onInput={(e) => {
-                  updateIdeaField(idea, "title", e.currentTarget.value);
-                }}
-              />
-            </div>
+      <Header></Header>
 
-            <div>
-              <input
-                type="text"
-                value={idea.description}
-                onInput={(e) => {
-                  updateIdeaField(idea, "description", e.currentTarget.value);
-                }}
-              />
-            </div>
+      <IdeaSorter></IdeaSorter>
 
-            <p>{idea.createdAt}</p>
-            <p>{idea.updatedAt}</p>
-
-            <button
-              onClick={() => {
-                removeIdea!(idea);
-              }}
-            >
-              Remove idea
-            </button>
-          </div>
-        );
-      })}
+      <Stack bg={"gray.100"} p={"6"} spacing={"2rem"}>
+        {ideas.map((idea) => {
+          return <IdeaCard key={idea.uuid} idea={idea} />;
+        })}
+      </Stack>
 
       <button onClick={createIdea}>add idea</button>
     </>
