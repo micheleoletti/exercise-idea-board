@@ -46,7 +46,7 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
       <Input
         placeholder="Title"
         className={styles.input}
-        autoFocus
+        autoFocus={idea.title.length == 0 ? true : false}
         fontWeight={"bold"}
         fontSize={"2xl"}
         value={idea.title}
