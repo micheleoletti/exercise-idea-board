@@ -5,8 +5,8 @@ import {
   IdeaContext,
   IdeaContextSchema,
   SortFieldOption,
-  SortParams,
 } from "../contexts/IdeaContext";
+import { SortParams } from "../models/sort-params";
 
 export default function IdeaSorter() {
   const { ideas, sortIdeas } = useContext<IdeaContextSchema>(IdeaContext);

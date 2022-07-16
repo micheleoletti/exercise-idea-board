@@ -24,7 +24,7 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
 
   const [showCharsLeft, setShowCharsLeft] = useState(false);
 
-  function datePipe(date: string) {
+  function getFormattedDate(date: string) {
     return new Date(date).toLocaleDateString("en-US", {
       year: "2-digit",
       month: "2-digit",
@@ -94,8 +94,12 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
         alignItems={"center"}
       >
         <Box fontSize={"sm"}>
-          <Text color={"gray.400"}>Created at: {datePipe(idea.createdAt)}</Text>
-          <Text color={"gray.400"}>Updated at: {datePipe(idea.updatedAt)}</Text>
+          <Text color={"gray.400"}>
+            Created at: {getFormattedDate(idea.createdAt)}
+          </Text>
+          <Text color={"gray.400"}>
+            Updated at: {getFormattedDate(idea.updatedAt)}
+          </Text>
         </Box>
 
         <Button

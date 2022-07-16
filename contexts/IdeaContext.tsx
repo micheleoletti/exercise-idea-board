@@ -1,15 +1,11 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { Idea } from "../models/idea";
 import { v4 as uuidv4 } from "uuid";
+import { SortParams } from "../models/sort-params";
 
 export enum SortFieldOption {
   Title,
   Date,
-}
-
-export interface SortParams {
-  field: SortFieldOption;
-  desc: boolean;
 }
 
 function sortIdeasByTitleComparisonFn(a: Idea, b: Idea) {
@@ -34,6 +30,8 @@ export const IdeaContext = React.createContext<IdeaContextSchema>({
   ideas: [],
 });
 
+/** Every time the idea state changes, Idea Provider is re-rendered and the callback methods are recreated
+ *  could that be a performance issue? */
 export function IdeaProvider({ children }: { children: ReactNode }) {
   const [ideas, setIdeas] = useState<Idea[]>([]);
 
