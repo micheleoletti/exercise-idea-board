@@ -1,15 +1,15 @@
 import { Button, Stack, Text } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import { FaArrowDown, FaSortDown, FaArrowUp } from "react-icons/fa";
 import {
-  IdeaContextSchema,
   IdeaContext,
+  IdeaContextSchema,
   SortFieldOption,
   SortParams,
 } from "../contexts/IdeaContext";
 
 export default function IdeaSorter() {
-  const { sortIdeas } = useContext<IdeaContextSchema>(IdeaContext);
+  const { ideas, sortIdeas } = useContext<IdeaContextSchema>(IdeaContext);
 
   const [sortParams, setSortParams] = useState<SortParams>({
     field: SortFieldOption.Title,
@@ -30,15 +30,16 @@ export default function IdeaSorter() {
 
   return (
     <Stack
-      px={"1rem"}
-      py={"0.5rem"}
-      bg={"gray.200"}
+      bg={"gray.800"}
+      px={"16px"}
+      color={"gray.100"}
       direction={"row"}
       alignItems={"center"}
     >
-      <Text>Sort by:</Text>
+      <Text color={"gray.300"}>Sort by:</Text>
       <Button
-        size={"sm"}
+        opacity={sortParams.field == SortFieldOption.Title ? "1" : "0.7"}
+        colorScheme={"white"}
         rightIcon={
           sortParams.field == SortFieldOption.Title ? (
             sortParams.desc ? (
@@ -56,7 +57,8 @@ export default function IdeaSorter() {
         Title
       </Button>
       <Button
-        size={"sm"}
+        opacity={sortParams.field == SortFieldOption.Date ? "1" : "0.7"}
+        colorScheme={"white"}
         rightIcon={
           sortParams.field == SortFieldOption.Date ? (
             sortParams.desc ? (
