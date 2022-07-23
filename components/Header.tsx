@@ -1,11 +1,27 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading, Stack } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Header() {
+  const { signOut } = useAuth();
+  const router = useRouter();
+
+  function logOutAndRedirect() {
+    signOut!();
+    router.push("/auth/sign-in");
+  }
+
   return (
     <>
-      <Box bg={"white"} p={"1rem"}>
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        bg={"white"}
+        p={"1rem"}
+      >
         <Heading fontWeight={"black"}>Idea Board</Heading>
-      </Box>
+        <Button onClick={logOutAndRedirect}>Log out</Button>
+      </Stack>
       <Box h={"8px"} bgGradient="linear(to-r, #108dc7, #ef8e38)"></Box>
     </>
   );

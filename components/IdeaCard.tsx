@@ -8,10 +8,11 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
+import { FaTrash } from "react-icons/fa";
 import { IdeaContext } from "../contexts/IdeaContext";
 import { Idea } from "../models/idea";
 import styles from "../styles/IdeaCard.module.css";
-import { FaTrash } from "react-icons/fa";
+import Card from "./Card";
 
 interface IdeaCardProps {
   idea: Idea;
@@ -35,14 +36,7 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
   }
 
   return (
-    <Stack
-      p={"6"}
-      spacing={"0.5rem"}
-      bg={"white"}
-      borderRadius={"lg"}
-      boxShadow={"md"}
-      minW={["100%", "25em"]}
-    >
+    <Card>
       <Input
         placeholder="Title"
         className={styles.input}
@@ -111,6 +105,6 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
           <FaTrash></FaTrash>
         </Button>
       </Stack>
-    </Stack>
+    </Card>
   );
 }

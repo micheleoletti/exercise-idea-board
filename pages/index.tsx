@@ -1,16 +1,20 @@
-import { FaPlusCircle } from "react-icons/fa";
-import { Box, Button, Flex, Stack, Text } from "@chakra-ui/react";
-import type { NextPage } from "next";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { NextPage } from "next";
 import { useContext } from "react";
+import { FaPlusCircle } from "react-icons/fa";
 import Header from "../components/Header";
 import IdeaCard from "../components/IdeaCard";
-import IdeaSorter from "../components/IdeaSorter";
-import { IdeaContext, IdeaContextSchema } from "../contexts/IdeaContext";
 import Toolbar from "../components/Toolbar";
+import { IdeaContext, IdeaContextSchema } from "../contexts/IdeaContext";
+import useAuthGuard from "../hooks/useAuthGuard";
 
 const Home: NextPage = () => {
+  const { canAccess } = useAuthGuard({});
+
   const { ideas, createIdea, updateIdea } =
     useContext<IdeaContextSchema>(IdeaContext);
+
+  if (!canAccess) return <></>;
 
   return (
     <>
