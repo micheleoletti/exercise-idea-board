@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import { FaTimes } from "react-icons/fa";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function SignIn() {
@@ -51,6 +52,7 @@ export default function SignIn() {
           bg={"white"}
           borderRadius={["none", "lg"]}
           boxShadow={"md"}
+          maxW={["100%", "20em"]}
           minW={["100%", "20em"]}
         >
           <Box>
@@ -59,10 +61,12 @@ export default function SignIn() {
           </Box>
 
           {errorMessage.length > 0 && (
-            <Alert status="error">
+            <Alert borderRadius={"lg"} variant={"subtle"} status="error">
               <AlertIcon />
-              <AlertTitle>Login error!</AlertTitle>
-              <AlertDescription>Check your email/password</AlertDescription>
+              <Stack direction={"column"} spacing={"0px"}>
+                <AlertTitle>Login error!</AlertTitle>
+                <AlertDescription>Check your email/password</AlertDescription>
+              </Stack>
             </Alert>
           )}
           <FormControl>
