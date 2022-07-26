@@ -13,6 +13,10 @@ const customJestConfig = {
     '^@/components/(.*)$': '<rootDir>/components/$1',
 
     '^@/pages/(.*)$': '<rootDir>/pages/$1',
+
+    // https://www.sobyte.net/post/2022-06/jest/, 5 hours lost right there
+    '^uuid$': require.resolve('uuid'),
+
   },
   testEnvironment: 'jest-environment-jsdom',
 }
