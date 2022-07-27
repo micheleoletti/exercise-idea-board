@@ -5,13 +5,13 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "cypress": "cypress open"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.3",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
-    "cypress": "^10.3.0",
     "framer-motion": "^6.4.3",
     "next": "latest",
     "react": "^18.1.0",
@@ -27,6 +27,7 @@
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.6",
     "@types/uuid": "^8.3.4",
+    "cypress": "^10.3.1",
     "eslint": "8.19.0",
     "eslint-config-next": "12.2.2",
     "jest": "28.1.0",

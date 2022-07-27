@@ -8,6 +8,7 @@ export enum SortFieldOption {
   Date,
 }
 
+/** TODO: Refactor sort functions into external helper functions */
 function sortIdeasByTitleComparisonFn(a: Idea, b: Idea) {
   if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
   if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
@@ -35,6 +36,9 @@ export const IdeaContext = React.createContext<IdeaContextSchema>({
 export function IdeaProvider({ children }: { children: ReactNode }) {
   const [ideas, setIdeas] = useState<Idea[]>([]);
 
+  /** TODO: Refactor idea logic outside of context for easier testing, otherwise when you provide a mock context, you
+   * have to mock these functions as well
+   */
   const createIdea = () => {
     setIdeas((current) => {
       let newIdeas = [...current];
