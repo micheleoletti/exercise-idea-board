@@ -1,4 +1,5 @@
 import { Button, Stack, Text } from "@chakra-ui/react";
+import { sortIdeas } from "helpers/idea-utils";
 import { useContext, useState } from "react";
 import { FaArrowDown, FaSortDown, FaArrowUp } from "react-icons/fa";
 import {
@@ -9,7 +10,7 @@ import {
 import { SortParams } from "../models/sort-params";
 
 export default function IdeaSorter() {
-  const { ideas, sortIdeas } = useContext<IdeaContextSchema>(IdeaContext);
+  const { ideas, setIdeas } = useContext<IdeaContextSchema>(IdeaContext);
 
   const [sortParams, setSortParams] = useState<SortParams>({
     field: SortFieldOption.Title,
@@ -25,7 +26,7 @@ export default function IdeaSorter() {
     if (field != sortParams.field) updatedSortParams.desc = false;
 
     setSortParams(updatedSortParams);
-    sortIdeas!(updatedSortParams);
+    sortIdeas!(setIdeas!, updatedSortParams);
   }
 
   return (

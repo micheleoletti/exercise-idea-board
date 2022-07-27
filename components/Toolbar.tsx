@@ -1,11 +1,13 @@
 import { Box, Button, Divider, SlideFade, Stack } from "@chakra-ui/react";
+import { createIdea } from "helpers/idea-utils";
 import { useContext } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { IdeaContext } from "../contexts/IdeaContext";
 import IdeaSorter from "./IdeaSorter";
 
 export default function Toolbar() {
-  const { ideas, createIdea } = useContext(IdeaContext);
+  const { ideas, setIdeas } = useContext(IdeaContext);
+
   return (
     <Stack
       py={"0.3rem"}
@@ -15,7 +17,9 @@ export default function Toolbar() {
       alignItems={"center"}
     >
       <Button
-        onClick={createIdea}
+        onClick={() => {
+          createIdea(setIdeas!);
+        }}
         colorScheme={"white"}
         leftIcon={<FaPlusCircle />}
       >

@@ -7,6 +7,7 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
+import { removeIdea, updateIdea } from "helpers/idea-utils";
 import { useContext, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { IdeaContext } from "../contexts/IdeaContext";
@@ -21,7 +22,7 @@ interface IdeaCardProps {
 const TEXTAREA_CHAR_LIMIT = 140;
 
 export default function IdeaCard({ idea }: IdeaCardProps) {
-  const { updateIdea, removeIdea } = useContext(IdeaContext);
+  const { setIdeas } = useContext(IdeaContext);
 
   const [showCharsLeft, setShowCharsLeft] = useState(false);
 
@@ -45,7 +46,7 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
         fontSize={"2xl"}
         value={idea.title}
         onInput={(e) => {
-          updateIdea!({ ...idea, title: e.currentTarget.value });
+          updateIdea!(setIdeas!, { ...idea, title: e.currentTarget.value });
         }}
       ></Input>
       <Divider></Divider>
@@ -72,7 +73,10 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
           className={styles.input}
           value={idea.description}
           onInput={(e: any) => {
-            updateIdea!({ ...idea, description: e.currentTarget.value });
+            updateIdea!(setIdeas!, {
+              ...idea,
+              description: e.currentTarget.value,
+            });
           }}
           maxLength={TEXTAREA_CHAR_LIMIT}
           rows={5}
@@ -98,7 +102,7 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
 
         <Button
           onClick={() => {
-            removeIdea!(idea);
+            removeIdea!(setIdeas!, idea);
           }}
           colorScheme={"red"}
         >

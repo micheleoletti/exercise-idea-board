@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { createIdea } from "helpers/idea-utils";
 import { NextPage } from "next";
 import { useContext } from "react";
 import { FaPlusCircle } from "react-icons/fa";
@@ -11,8 +12,7 @@ import useAuthGuard from "../hooks/useAuthGuard";
 const Home: NextPage = () => {
   const { canAccess } = useAuthGuard({});
 
-  const { ideas, createIdea, updateIdea } =
-    useContext<IdeaContextSchema>(IdeaContext);
+  const { ideas, setIdeas } = useContext<IdeaContextSchema>(IdeaContext);
 
   if (!canAccess) return <></>;
 
@@ -44,7 +44,9 @@ const Home: NextPage = () => {
             borderRadius={"lg"}
             minW={["100%", "25em"]}
             alignItems={"center"}
-            onClick={createIdea}
+            onClick={() => {
+              createIdea(setIdeas!);
+            }}
             bg={"gray.200"}
             minH={"300px"}
           >
