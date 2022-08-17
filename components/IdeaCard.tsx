@@ -101,6 +101,7 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
         </Box>
 
         <Button
+          aria-label="delete idea"
           onClick={() => {
             removeIdea!(setIdeas!, idea);
           }}

@@ -1,5 +1,6 @@
 import React, {
   Dispatch,
+  PropsWithChildren,
   ReactNode,
   SetStateAction,
   useEffect,
@@ -21,10 +22,14 @@ export const IdeaContext = React.createContext<IdeaContextSchema>({
   ideas: [],
 });
 
-/** Every time the idea state changes, Idea Provider is re-rendered and the callback methods are recreated
- *  could that be a performance issue? */
-export function IdeaProvider({ children }: { children: ReactNode }) {
-  const [ideas, setIdeas] = useState<Idea[]>([]);
+interface IdeaProviderProps extends PropsWithChildren<any> {
+  initialIdeas?: Idea[];
+}
+export function IdeaProvider({
+  initialIdeas = [],
+  children,
+}: IdeaProviderProps) {
+  const [ideas, setIdeas] = useState<Idea[]>(initialIdeas);
 
   useEffect(() => {
     if (ideas.length > 0) localStorage.setItem("ideas", JSON.stringify(ideas));

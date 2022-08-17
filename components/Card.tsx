@@ -1,7 +1,7 @@
 import { Stack } from "@chakra-ui/react";
 import { PropsWithChildren } from "react";
 
-export default function Card({ children }: PropsWithChildren) {
+export default function Card({ children }: PropsWithChildren<any>) {
   return (
     <Stack
       direction={"column"}

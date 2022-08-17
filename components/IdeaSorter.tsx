@@ -39,14 +39,15 @@ export default function IdeaSorter() {
     >
       <Text color={"gray.300"}>Sort by:</Text>
       <Button
+        aria-label="sort by title"
         opacity={sortParams.field == SortFieldOption.Title ? "1" : "0.7"}
         colorScheme={"white"}
         rightIcon={
           sortParams.field == SortFieldOption.Title ? (
             sortParams.desc ? (
-              <FaArrowDown />
+              <FaArrowDown aria-label="sorting title desc" />
             ) : (
-              <FaArrowUp />
+              <FaArrowUp aria-label="sorting title asc" />
             )
           ) : undefined
         }
@@ -58,14 +59,15 @@ export default function IdeaSorter() {
         Title
       </Button>
       <Button
+        aria-label="sort by date"
         opacity={sortParams.field == SortFieldOption.Date ? "1" : "0.7"}
         colorScheme={"white"}
         rightIcon={
           sortParams.field == SortFieldOption.Date ? (
             sortParams.desc ? (
-              <FaArrowDown />
+              <FaArrowDown aria-label="sorting date desc" />
             ) : (
-              <FaArrowUp />
+              <FaArrowUp aria-label="sorting date asc" />
             )
           ) : undefined
         }
