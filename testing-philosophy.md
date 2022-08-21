@@ -1,3 +1,5 @@
+RTL/Jest + Typescript setup: https://javascript.plainenglish.io/the-practical-guide-to-start-react-testing-library-with-typescript-d386804a018
+
 # Test philosophy
 
 The purpose of testing is gaining confidence.

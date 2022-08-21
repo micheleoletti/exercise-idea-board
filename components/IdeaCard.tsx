@@ -19,7 +19,7 @@ interface IdeaCardProps {
   idea: Idea;
 }
 
-const TEXTAREA_CHAR_LIMIT = 140;
+export const TEXTAREA_CHAR_LIMIT = 140;
 
 export default function IdeaCard({ idea }: IdeaCardProps) {
   const { setIdeas } = useContext(IdeaContext);
@@ -52,6 +52,7 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
       <Divider></Divider>
       <Box>
         <Text
+          aria-label="char countdown"
           textAlign={"right"}
           opacity={showCharsLeft ? "1" : "0"}
           color={
@@ -92,10 +93,10 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
         alignItems={"center"}
       >
         <Box fontSize={"sm"}>
-          <Text color={"gray.400"}>
+          <Text aria-label="created at time" color={"gray.400"}>
             Created at: {getFormattedDate(idea.createdAt)}
           </Text>
-          <Text color={"gray.400"}>
+          <Text aria-label="updated at time" color={"gray.400"}>
             Updated at: {getFormattedDate(idea.updatedAt)}
           </Text>
         </Box>
