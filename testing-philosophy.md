@@ -49,7 +49,8 @@ So the testing plan becomes:
 - check updated time: INTEGRATION/UNIT
 - character countdown: INTEGRATION/UNIT
 
-UPDATE
+# UPDATE
+
 After implementing all the tests, I feel like most of the things can be done with RTL (userEvent abstraction brings the interaction simulation even closer to E2E testing).
 
 I start seeing Cypress as a golden heavy expensive tool to test just:
