@@ -17,6 +17,7 @@ export default function Toolbar() {
       alignItems={"center"}
     >
       <Button
+        aria-label="toolbar add idea"
         onClick={() => {
           createIdea(setIdeas!);
         }}

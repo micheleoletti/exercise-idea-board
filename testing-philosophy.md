@@ -15,6 +15,7 @@ The key features of this software are:
 - sort notes
 - updated time updating
 - character countdown
+- content persistente on page refresh
 
 Ideally, we would have a human, the final user, testing the product, so for testing I always start with E2E testing in mind.
 
@@ -39,6 +40,7 @@ So the testing plan becomes:
 
 - login: E2E
 - logout: E2E
+- content persistente on page refresh: E2E
 - create note: INTEGRATION/UNIT
 - edit note: INTEGRATION/UNIT
 - delete note: INTEGRATION/UNIT
@@ -46,3 +48,13 @@ So the testing plan becomes:
 - sort notes: INTEGRATION/UNIT
 - check updated time: INTEGRATION/UNIT
 - character countdown: INTEGRATION/UNIT
+
+UPDATE
+After implementing all the tests, I feel like most of the things can be done with RTL (userEvent abstraction brings the interaction simulation even closer to E2E testing).
+
+I start seeing Cypress as a golden heavy expensive tool to test just:
+
+- multi-page scenarios
+- happy path scenarios of economically important features
+
+Everything else should be done with RTL.

@@ -20,7 +20,9 @@ export default function Header() {
         p={"1rem"}
       >
         <Heading fontWeight={"black"}>Idea Board</Heading>
-        <Button onClick={logOutAndRedirect}>Log out</Button>
+        <Button aria-label="logout" onClick={logOutAndRedirect}>
+          Log out
+        </Button>
       </Stack>
       <Box h={"8px"} bgGradient="linear(to-r, #108dc7, #ef8e38)"></Box>
     </>
