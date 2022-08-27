@@ -1,5 +1,5 @@
 import IdeaList from "@/components/IdeaList";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { IdeaProvider } from "contexts/IdeaContext";
 import { Idea } from "models/idea";
 import React from "react";
@@ -8,6 +8,7 @@ import userEvent from "@testing-library/user-event";
 import IdeaSorter from "@/components/IdeaSorter";
 
 import "@testing-library/jest-dom";
+import { render } from "helpers/test-utils";
 
 const renderSortableItems = () => {
   const ideas: Idea[] = [
@@ -35,10 +36,11 @@ const renderSortableItems = () => {
   ];
 
   render(
-    <IdeaProvider initialIdeas={ideas}>
+    <>
       <IdeaSorter></IdeaSorter>
       <IdeaList></IdeaList>
-    </IdeaProvider>
+    </>,
+    { allProvidersProps: { initialIdeaState: ideas } }
   );
 };
 

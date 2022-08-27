@@ -1,20 +1,19 @@
 import IdeaList from "@/components/IdeaList";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { IdeaProvider } from "contexts/IdeaContext";
 import { Idea } from "models/idea";
 import React from "react";
 import { expect } from "@jest/globals";
 import userEvent from "@testing-library/user-event";
+import { render } from "helpers/test-utils";
 
 describe("todos methods", () => {
   it("can create a todo", () => {
     const ideas: Idea[] = [];
 
-    render(
-      <IdeaProvider initialIdeas={ideas}>
-        <IdeaList></IdeaList>
-      </IdeaProvider>
-    );
+    render(<IdeaList></IdeaList>, {
+      allProvidersProps: { initialIdeaState: [] },
+    });
 
     const button = screen.getByRole("button", { name: /Add Idea/i });
 
@@ -36,11 +35,9 @@ describe("todos methods", () => {
       },
     ];
 
-    render(
-      <IdeaProvider initialIdeas={ideas}>
-        <IdeaList></IdeaList>
-      </IdeaProvider>
-    );
+    render(<IdeaList></IdeaList>, {
+      allProvidersProps: { initialIdeaState: ideas },
+    });
 
     const titleInput = screen.getByPlaceholderText("Title");
     await userEvent.clear(titleInput);
@@ -60,11 +57,9 @@ describe("todos methods", () => {
       },
     ];
 
-    render(
-      <IdeaProvider initialIdeas={ideas}>
-        <IdeaList></IdeaList>
-      </IdeaProvider>
-    );
+    render(<IdeaList></IdeaList>, {
+      allProvidersProps: { initialIdeaState: ideas },
+    });
 
     const deleteButton = screen.getByRole("button", { name: /delete idea/i });
 
