@@ -29,13 +29,21 @@ export function updateIdea(
 
     let ideaIndex = updatedIdeas.findIndex((item) => item.uuid == idea.uuid);
 
-    updatedIdeas[ideaIndex] = {
-      ...idea,
-      updatedAt: new Date().toISOString(),
-    };
+    updatedIdeas[ideaIndex] = getUpdatedIdea(idea);
 
     return updatedIdeas;
   });
+}
+
+export function getUpdatedIdea(idea: Idea): Idea {
+  return {
+    ...idea,
+    updatedAt: new Date().toISOString(),
+  };
+}
+
+export function updateIdeaField(idea: Idea, field: string, value: any) {
+  return { ...idea, [field]: value, updatedAt: new Date().toISOString() };
 }
 
 export function removeIdea(

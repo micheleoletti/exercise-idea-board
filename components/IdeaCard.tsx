@@ -7,24 +7,38 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
-import { removeIdea, updateIdea } from "helpers/idea-utils";
-import { useContext, useState } from "react";
+import { getUpdatedIdea, removeIdea, updateIdea } from "helpers/idea-utils";
+import { FormEvent, useCallback, useContext, useMemo, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { IdeaContext } from "../contexts/IdeaContext";
 import { Idea } from "../models/idea";
 import styles from "../styles/IdeaCard.module.css";
 import Card from "./Card";
+import debounce from "../helpers/generic-utils";
 
 interface IdeaCardProps {
   idea: Idea;
 }
 
 export const TEXTAREA_CHAR_LIMIT = 140;
+const debounceTimeInMilliseconds = 3000;
 
 export default function IdeaCard({ idea }: IdeaCardProps) {
+  const [ideaState, setIdeaState] = useState<Idea>(idea);
+
   const { setIdeas } = useContext(IdeaContext);
 
   const [showCharsLeft, setShowCharsLeft] = useState(false);
+
+  const handleIdeaUpdate = (updatedIdea: Idea) => {
+    updateIdea!(setIdeas!, updatedIdea);
+  };
+
+  /** Why useCallback? https://www.joshwcomeau.com/snippets/javascript/debounce/  */
+  const debouncedUpdate = useCallback(
+    debounce(handleIdeaUpdate, debounceTimeInMilliseconds),
+    []
+  );
 
   function getFormattedDate(date: string) {
     return new Date(date).toLocaleDateString("en-US", {
@@ -36,17 +50,31 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
     });
   }
 
+  function updateIdeaField(
+    field: string,
+    e: FormEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    let updatedIdea = getUpdatedIdea({
+      ...ideaState,
+      [field]: e.currentTarget.value,
+    });
+
+    debouncedUpdate(updatedIdea);
+
+    setIdeaState(updatedIdea);
+  }
+
   return (
     <Card>
       <Input
         placeholder="Title"
         className={styles.input}
-        autoFocus={idea.title.length == 0 ? true : false}
+        autoFocus={ideaState.title.length == 0 ? true : false}
         fontWeight={"bold"}
         fontSize={"2xl"}
-        value={idea.title}
+        value={ideaState.title}
         onInput={(e) => {
-          updateIdea!(setIdeas!, { ...idea, title: e.currentTarget.value });
+          updateIdeaField("title", e);
         }}
       ></Input>
       <Divider></Divider>
@@ -56,12 +84,12 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
           textAlign={"right"}
           opacity={showCharsLeft ? "1" : "0"}
           color={
-            TEXTAREA_CHAR_LIMIT - idea.description.length == 0
+            TEXTAREA_CHAR_LIMIT - ideaState.description.length == 0
               ? "red.300"
               : "gray.400"
           }
         >
-          {TEXTAREA_CHAR_LIMIT - idea.description.length}
+          {TEXTAREA_CHAR_LIMIT - ideaState.description.length}
         </Text>
         <Textarea
           placeholder="Description"
@@ -72,12 +100,9 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
             setShowCharsLeft(false);
           }}
           className={styles.input}
-          value={idea.description}
+          value={ideaState.description}
           onInput={(e: any) => {
-            updateIdea!(setIdeas!, {
-              ...idea,
-              description: e.currentTarget.value,
-            });
+            updateIdeaField("description", e);
           }}
           maxLength={TEXTAREA_CHAR_LIMIT}
           rows={5}
@@ -94,17 +119,17 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
       >
         <Box fontSize={"sm"}>
           <Text aria-label="created at time" color={"gray.400"}>
-            Created at: {getFormattedDate(idea.createdAt)}
+            Created at: {getFormattedDate(ideaState.createdAt)}
           </Text>
           <Text aria-label="updated at time" color={"gray.400"}>
-            Updated at: {getFormattedDate(idea.updatedAt)}
+            Updated at: {getFormattedDate(ideaState.updatedAt)}
           </Text>
         </Box>
 
         <Button
           aria-label="delete idea"
           onClick={() => {
-            removeIdea!(setIdeas!, idea);
+            removeIdea!(setIdeas!, ideaState);
           }}
           colorScheme={"red"}
         >

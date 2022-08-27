@@ -1,10 +1,12 @@
-import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { screen } from "@testing-library/react";
 import { Idea } from "models/idea";
 import IdeaCard, { TEXTAREA_CHAR_LIMIT } from "../components/IdeaCard";
 import userEvent from "@testing-library/user-event";
 import { IdeaProvider } from "contexts/IdeaContext";
 import IdeaList from "@/components/IdeaList";
+import { render } from "helpers/test-utils";
+import { expect } from "@jest/globals";
 
 let emptyIdea: Idea = {
   uuid: "uuid",
@@ -16,18 +18,19 @@ let emptyIdea: Idea = {
 
 describe("Idea card", () => {
   it("title autofocused when empty idea is provided", () => {
-    render(<IdeaCard idea={emptyIdea} />);
+    // TODO: fix state not working correctly
+    render(<IdeaCard idea={emptyIdea} />, {
+      allProvidersProps: { initialIdeaState: [] },
+    });
 
     expect(screen.getByPlaceholderText("Title")).toHaveFocus();
   });
 
   it("show char countdown", async () => {
     // ask Dan: the fact that to test the IdeaCard I have to use IdeaList, does it highlight an architectural issue?
-    render(
-      <IdeaProvider initialIdeas={[emptyIdea]}>
-        <IdeaList></IdeaList>
-      </IdeaProvider>
-    );
+    render(<IdeaList></IdeaList>, {
+      allProvidersProps: { initialIdeaState: [emptyIdea] },
+    });
 
     let charsCountdown = screen.getByLabelText("char countdown");
     const descriptionTextarea = screen.getByPlaceholderText("Description");
@@ -52,13 +55,9 @@ describe("Idea card", () => {
       updatedAt: oldUpdateTime.toISOString(),
     };
 
-    const nowTime = new Date();
-
-    render(
-      <IdeaProvider initialIdeas={[emptyIdea]}>
-        <IdeaList></IdeaList>
-      </IdeaProvider>
-    );
+    render(<IdeaList></IdeaList>, {
+      allProvidersProps: { initialIdeaState: [oldIdea] },
+    });
 
     const titleInput = screen.getByPlaceholderText("Title");
     await userEvent.type(titleInput, "new updated title");
