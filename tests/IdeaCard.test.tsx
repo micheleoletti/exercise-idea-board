@@ -1,12 +1,11 @@
+import IdeaList from "@/components/IdeaList";
+import { expect } from "@jest/globals";
 import "@testing-library/jest-dom";
 import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { render } from "helpers/test-utils";
 import { Idea } from "models/idea";
 import IdeaCard, { TEXTAREA_CHAR_LIMIT } from "../components/IdeaCard";
-import userEvent from "@testing-library/user-event";
-import { IdeaProvider } from "contexts/IdeaContext";
-import IdeaList from "@/components/IdeaList";
-import { render } from "helpers/test-utils";
-import { expect } from "@jest/globals";
 
 let emptyIdea: Idea = {
   uuid: "uuid",

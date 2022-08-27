@@ -1,11 +1,9 @@
 import IdeaList from "@/components/IdeaList";
-import { fireEvent, screen } from "@testing-library/react";
-import { IdeaProvider } from "contexts/IdeaContext";
-import { Idea } from "models/idea";
-import React from "react";
 import { expect } from "@jest/globals";
+import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { render } from "helpers/test-utils";
+import { Idea } from "models/idea";
 
 describe("todos methods", () => {
   it("can create a todo", () => {

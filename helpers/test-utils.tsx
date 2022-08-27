@@ -7,6 +7,14 @@ interface AllTheProvidersProps extends PropsWithChildren<any> {
   initialIdeaState?: Idea[];
 }
 
+/** ask Dan:
+ * Is it the right approach to pass an initial state?
+ * Or I should give the customRender consumer the ability the specify
+ * manually the value(state + stateSetter)?
+ * Naively I prefer this way because I can delegate the state management to React as soon as possible
+ * and keep my test close to reality.
+ * However I may be missing some testing scenarios where passing mock functions is mandatory.
+ */
 const AllTheProviders = ({
   initialIdeaState = [],
   children,
