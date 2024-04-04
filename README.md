@@ -1,25 +1,13 @@
-# Next.js + Jest
+# Idea Board Exercise Project
+<img width="1360" alt="image" src="https://github.com/micheleoletti/exercise-idea-board/assets/61937589/0a2d2299-f9d1-4b49-baaf-810c4d0240d6">
 
-This example shows how to configure Jest to work with Next.js.
 
-This includes Next.js' built-in support for Global CSS, CSS Modules and TypeScript.
+This is a simple exercise project I did with my React mentor.
 
-## How to Use
+The focus was on TDD and creating the best possible UX for this simple app.
 
-Quickly get started using [Create Next App](https://github.com/vercel/next.js/tree/canary/packages/create-next-app#readme)!
-
-In your terminal, run the following command:
-
-```bash
-npx create-next-app --example with-jest with-jest-app
-# or
-yarn create next-app --example with-jest with-jest-app
-# or
-pnpm create next-app --example with-jest with-jest-app
-```
-
-## Run Jest Tests
-
-```bash
-npm test
-```
+## How to use
+1. Go to https://exercise-idea-board.vercel.app/.
+2. Login with `admin`/`admin`.
+3. Try creating, sorting, deleting, refreshing the page...
+4. Log out and take a breath to appreciate the groundbreaking work you've just witnessed.
