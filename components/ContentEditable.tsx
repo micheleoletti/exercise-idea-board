@@ -1,6 +1,6 @@
 import { PropsWithChildren, useState } from "react";
 
-export default function ContentEditable(props: PropsWithChildren) {
+export default function ContentEditable(props: PropsWithChildren<any>) {
   const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing) {

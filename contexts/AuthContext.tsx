@@ -12,7 +12,7 @@ interface AuthContextSchema {
 
 export const AuthContext = React.createContext<AuthContextSchema>({});
 
-export default function AuthProvider({ children }: PropsWithChildren) {
+export default function AuthProvider({ children }: PropsWithChildren<any>) {
   /**
    * Sign in
    * @param email

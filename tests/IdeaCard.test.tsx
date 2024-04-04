@@ -26,7 +26,6 @@ describe("Idea card", () => {
   });
 
   it("show char countdown", async () => {
-    // ask Dan: the fact that to test the IdeaCard I have to use IdeaList, does it highlight an architectural issue?
     render(<IdeaList></IdeaList>, {
       allProvidersProps: { initialIdeaState: [emptyIdea] },
     });
